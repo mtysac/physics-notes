@@ -1,0 +1,48 @@
+@media screen and (max-width:700px) {   
+
+    .hero_text {
+        display: flex;
+        font-size: 6vh;
+    }
+
+    .content-container {
+        font-size: 3vh;
+    }
+
+    .intro-container {
+        width: 80vw;
+    }
+
+    .kinematics-container {
+        width: 80vw;
+    }
+
+    .contact-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width:1200px) {
+
+    section {
+        margin: 0 5%;
+    }
+
+    #contact {
+        height: 30vh;
+    }
+    
+    .contact-container {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width:1400px) {
+
+    #hero {
+        display: flex;
+    }
+
+}
