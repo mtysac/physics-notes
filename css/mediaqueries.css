@@ -16,6 +16,10 @@
     .kinematics-container {
         width: 80vw;
     }
+    
+    .projectiles-container {
+        width: 80vw;
+    }
 
     .contact-container {
         display: flex;

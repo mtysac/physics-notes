@@ -49,7 +49,18 @@ section {
     min-height: fit-content;
 }
 
-.title {
+/* COLOUR WHITE */
+
+.title_1 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 4vh;
+    color: rgb(186, 186, 191);
+}
+
+/* DEFAULT COLOUR BLACK */
+
+.title_2 {
     text-align: center;
     font-weight: 400;
     font-size: 4vh
@@ -114,6 +125,7 @@ a:hover {
 /* HERO */
 
 #hero {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,8 +141,7 @@ a:hover {
 
 .character-container {
     display: flex;
-    padding-top: 10vh;
-    align-items: center;
+    align-items:center;
 }
 
 .character {
@@ -139,7 +150,6 @@ a:hover {
 
 .hero_text-container {
     display: flex;
-    padding-top: 10vh;
     align-items: center;
 }
 
@@ -154,6 +164,11 @@ a:hover {
 }
 
 /* CONTENT */
+
+#content{ 
+    margin: 0%;
+    background-color:rgb(59, 68, 83);
+}
 
 .content-container {
     display: flex;
@@ -193,9 +208,26 @@ a:hover {
     border-radius: 1rem;
     background: rgb(170, 170, 173);
 }
+/* 
+.projectiles-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-wrap: wrap;
+    color:rgb(0, 0, 0);
+    height: 10vh;
+    width: 50vw;
+    margin-top: 0.01rem; adjusted to match space betweenn containers (not the same value as previous 
+    border: 1rem solid;
+    border-color: rgb(170, 170, 173);
+    border-radius: 1rem;
+    background: rgb(170, 170, 173);
+} */
+
 
 .extra {
     font-size: 2vh;
+    color: rgb(186, 186, 191);
     margin: 4rem;
 }
 
