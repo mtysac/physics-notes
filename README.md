@@ -1,4 +1,4 @@
-# Free physics notes!
+### Free physics notes!
 
 Hi everyone! I made this website so I could access my notes and make it accessible to anyone interested!
 
