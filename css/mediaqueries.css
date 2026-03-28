@@ -1,34 +1,6 @@
-@media screen and (max-width:700px) {   
+/* tablet/small desktop */
 
-    .hero_text {
-        display: flex;
-        font-size: 6vh;
-    }
-
-    .content-container {
-        font-size: 3vh;
-    }
-
-    .intro-container {
-        width: 50vw;
-    }
-
-    .kinematics-container {
-        width: 50vw;
-    }
-    
-    .Applications-NLaw-container {
-        width: 50vw;
-    }
-
-    .contact-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
 
     section {
         margin: 0 5%;
@@ -37,16 +9,55 @@
     #contact {
         height: 30vh;
     }
-    
+
     .contact-container {
         margin-top: 0;
     }
 }
 
-@media screen and (max-width:1400px) {
+/* medium screens */
+
+@media screen and (max-width: 1400px) {
 
     #hero {
         display: flex;
     }
+}
 
+/* mobile */
+
+@media screen and (max-width: 700px) {
+
+    /* hero stacks vertically on small screens */
+    #hero {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .hero_text {
+        font-size: 6vh;
+        text-align: center;
+    }
+
+    .content-container {
+        font-size: 3vh;
+    }
+
+    .intro-container,
+    .kinematics-container,
+    .Applications-NLaw-container {
+        width: 72vw;
+    }
+
+    .contact-container {
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 1.2rem 2rem;
+    }
+
+    /* hide the separator pipe on mobile */
+    #contact .contact-container > *:not(div) {
+        display: none;
+    }
 }
