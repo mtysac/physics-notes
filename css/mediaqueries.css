@@ -51,7 +51,11 @@
     .sim-container {
         flex: unset;
         width: 80vw;
-        min-height: 20vh;
+        min-height: 35vw;
+    }
+
+    .sim-container a {
+        min-height: 35vw;
     }
 
     .notes-container {

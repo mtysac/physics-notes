@@ -262,21 +262,15 @@ nav {
 
 /* sim button — big preview card on the left */
 .sim-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: rgb(0, 0, 0);
     flex: 0 0 28vw;
     min-height: 36vh;
     border-radius: 1rem;
     background: rgb(170, 170, 173);
     border: none;
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
     animation: fadeUp 0.7s ease both;
     animation-delay: 0.05s;
-    font-size: 3.5vh;
     position: relative;
     overflow: hidden;
 }
@@ -286,6 +280,7 @@ nav {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    min-height: 36vh;
     justify-content: flex-end;
     align-items: center;
     position: relative;
@@ -297,26 +292,26 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1rem;
-    opacity: 0.85;
+    object-position: center top;
+    opacity: 0.9;
     transition: opacity 0.22s ease;
 }
 
 .sim-container:hover .sim-preview {
-    opacity: 0.6;
+    opacity: 0.65;
 }
 
 .sim-label {
     position: relative;
     z-index: 1;
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.8rem;
-    background: rgba(59, 68, 83, 0.75);
+    padding: 0.5rem 1.2rem;
+    margin-bottom: 1rem;
+    background: rgba(59, 68, 83, 0.8);
     color: rgb(186, 186, 191);
     border-radius: 0.5rem;
-    font-size: 2vh;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    font-size: 1.8vh;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .intro-container          { animation-delay: 0.15s; }
