@@ -277,6 +277,7 @@ nav {
     animation: fadeUp 0.7s ease both;
     animation-delay: 0.05s;
     font-size: 3.5vh;
+    position: relative;
     overflow: hidden;
 }
 
