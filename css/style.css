@@ -390,6 +390,7 @@ a:hover { opacity: 0.7; }
     flex-direction: column;
     gap: 0.3rem;
     background: rgb(59, 68, 83);
+    text-align: left;
 }
 
 .sim-title {
