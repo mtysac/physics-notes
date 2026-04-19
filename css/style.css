@@ -50,7 +50,7 @@ a:hover { opacity: 0.7; }
 
 .title_1, .title_2 {
     font-family: "Pixelify Sans", sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 400;
     color: #1a1a1a;
     text-transform: capitalize;
@@ -69,7 +69,6 @@ a:hover { opacity: 0.7; }
     gap: 1rem;
     animation: fadeUp 0.7s ease both;
     min-height: 0;
-    overflow: auto;
 }
 
 .hero-top {
@@ -83,7 +82,7 @@ a:hover { opacity: 0.7; }
 .character {
     height: 100px;
     animation: floatPenguin 3.6s ease-in-out infinite;
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
 }
 
 .hero_text-container { display: flex; align-items: center; }
@@ -145,7 +144,7 @@ a:hover { opacity: 0.7; }
     padding: 2rem;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     gap: 2rem;
     animation: fadeUp 0.7s ease 0.1s both;
     min-height: 0;
@@ -161,15 +160,18 @@ a:hover { opacity: 0.7; }
 .contact-right {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0.8rem;
     flex: 1;
-    border-left: 1.5px solid #d0d0d0;
-    padding-left: 2rem;
+    background: rgb(59, 68, 83);
+    border-radius: 0.8rem;
+    padding: 1rem 1.2rem;
+    border: none;
 }
 
 .about-text {
     font-size: 0.88rem;
-    color: #555;
+    color: rgba(255,255,255,0.8);
     line-height: 1.6;
 }
 
@@ -177,11 +179,11 @@ a:hover { opacity: 0.7; }
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    background: #e0e0e0;
-    border-radius: 2rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 0.8rem;
     padding: 0.4rem 1rem;
     font-size: 0.82rem;
-    color: #444;
+    color: #ffffff;
     font-weight: 500;
     width: fit-content;
 }
@@ -245,7 +247,6 @@ a:hover { opacity: 0.7; }
     border-radius: 1.2rem;
     padding: 2rem;
     animation: fadeUp 0.7s ease 0.2s both;
-    overflow: auto;
     min-height: 0;
 }
 
@@ -265,7 +266,8 @@ a:hover { opacity: 0.7; }
 /* note cards */
 .intro-container,
 .kinematics-container,
-.applications-nlaw-container {
+.applications-nlaw-container,
+.newtons-sim-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -282,6 +284,13 @@ a:hover { opacity: 0.7; }
     font-weight: 500;
 }
 
+/* newton's sim card — same style as kinematics sim card */
+.newtons-sim-container {
+    height: unset;
+    background: rgb(59, 68, 83);
+    overflow: hidden;
+}
+
 .intro-container          { animation-delay: 0.15s; }
 .kinematics-container     { animation-delay: 0.22s; }
 .applications-nlaw-container { animation-delay: 0.29s; }
@@ -292,6 +301,11 @@ a:hover { opacity: 0.7; }
     transform: translateY(-3px);
     box-shadow: 0 6px 18px rgba(0,0,0,0.10);
     background: #d4d4d4;
+}
+
+.newtons-sim-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
 .intro-container a,
@@ -305,13 +319,31 @@ a:hover { opacity: 0.7; }
     opacity: 1;
 }
 
+.newtons-sim-container a {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+}
+
 .intro-container a:hover,
 .kinematics-container a:hover,
-.applications-nlaw-container a:hover { opacity: 1; }
+.applications-nlaw-container a:hover,
+.newtons-sim-container a:hover { opacity: 1; }
+
+/* sim cards wrapper */
+.sims-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex: 0 0 auto;
+}
 
 /* sim card */
-.sim-container {
-    flex: 0 0 260px;
+.sim-container,
+.newtons-sim-container {
+    width: 220px;
     border-radius: 0.8rem;
     background: rgb(59, 68, 83);
     border: none;
@@ -321,7 +353,8 @@ a:hover { opacity: 0.7; }
     overflow: hidden;
 }
 
-.sim-container a {
+.sim-container a,
+.newtons-sim-container a {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -331,10 +364,10 @@ a:hover { opacity: 0.7; }
 
 .sim-image-wrap {
     width: 100%;
-    flex: 1;
+    height: 140px;
     overflow: hidden;
     border-radius: 0.8rem 0.8rem 0 0;
-    min-height: 160px;
+    flex-shrink: 0;
 }
 
 .sim-preview {
@@ -346,8 +379,10 @@ a:hover { opacity: 0.7; }
     transition: opacity 0.2s ease;
 }
 
-.sim-container:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
-.sim-container:hover .sim-preview { opacity: 0.85; }
+.sim-container:hover,
+.newtons-sim-container:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+.sim-container:hover .sim-preview,
+.newtons-sim-container:hover .sim-preview { opacity: 0.85; }
 
 .sim-info {
     padding: 0.8rem 1rem;

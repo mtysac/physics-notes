@@ -7,7 +7,8 @@
         flex-direction: column;
         padding: 1rem;
         gap: 1rem;
-        min-height: unset;
+        height: auto;
+        overflow: visible;
     }
 
     #hero {
@@ -24,10 +25,8 @@
     }
 
     .contact-right {
-        border-left: none;
-        padding-left: 0;
-        border-top: 1.5px solid #d0d0d0;
-        padding-top: 1rem;
+        border-top: none;
+        padding-top: 0;
         width: 100%;
     }
 
@@ -43,14 +42,21 @@
         align-items: center;
     }
 
-    .sim-container {
+    .sim-container,
+    .newtons-sim-container {
         flex: unset;
         width: 100%;
     }
 
-    .sim-container a { width: 100%; }
+    .sim-container a,
+    .newtons-sim-container a { width: 100%; }
 
     .sim-image-wrap { min-height: 44vw; }
+
+    .sims-container {
+        flex-direction: column;
+        width: 100%;
+    }
 
     .notes-container { width: 100%; }
 

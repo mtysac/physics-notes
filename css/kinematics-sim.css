@@ -67,7 +67,7 @@ header p { font-size:1.8vh; color:var(--muted); margin-top:0.3rem; }
 /* CANVAS */
 .canvas-wrap {
     position:relative; border-radius:1rem; overflow:hidden;
-    background:var(--dark); box-shadow:0 2px 8px rgba(0,0,0,0.10);
+    background:#78dbff; box-shadow:0 2px 8px rgba(0,0,0,0.10);
     cursor:crosshair;
 }
 
@@ -75,7 +75,7 @@ canvas { display:block; width:100%; }
 
 .canvas-hint {
     position:absolute; bottom:0.5rem; right:0.8rem;
-    font-size:1.3vh; color:rgba(186,186,191,0.45);
+    font-size:1.3vh; color:rgba(0,0,0,0.3);
 }
 
 /* STATS */

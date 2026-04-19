@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kinematics Simulator — penguin</title>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/simulator.css">
+    <link rel="stylesheet" href="./css/kinematics-sim.css">
 </head>
 <body>
 
@@ -27,6 +27,8 @@
         <button id="btn-reset">↺ Reset</button>
         <button id="btn-clear">🗑 Clear Trails</button>
     </div>
+
+    <div class="legend" id="legend-row"></div>
 
     <div class="canvas-wrap" id="canvas-wrap">
         <canvas id="canvas" height="380"></canvas>
@@ -97,8 +99,6 @@
 
     <div class="did-you-know" id="dyk">💡 <span>Did you know?</span> At 45° the range is maximised on flat ground.</div>
 
-    <div class="legend" id="legend-row"></div>
-
     <div class="formulas">
         <div class="formula">Horizontal: <span>x = v₀·cos(θ)·t</span></div>
         <div class="formula">Vertical: <span>y = y₀ + v₀·sin(θ)·t − ½g·t²</span></div>
@@ -110,6 +110,6 @@
 
 </div>
 
-<script src="./js/simulator.js"></script>
+<script src="./js/kinematics-sim.js"></script>
 </body>
 </html>

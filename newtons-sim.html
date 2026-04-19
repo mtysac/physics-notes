@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Laws Simulator — penguin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/newtons-sim.css">
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">penguin</div>
+    <div class="nav-back"><a href="./index.html">← back</a></div>
+</nav>
+
+<header>
+    <h1>Newton's Laws Simulator</h1>
+    <p>select a mode below to explore different concepts</p>
+</header>
+
+<div class="sim-wrapper">
+
+    <!-- MODE TABS -->
+    <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="incline">Inclined Plane</button>
+        <button class="mode-tab" data-mode="connected">Connected Objects</button>
+        <button class="mode-tab" data-mode="spring">Spring (Hooke's Law)</button>
+        <button class="mode-tab" data-mode="circular">Circular Motion</button>
+    </div>
+
+    <!-- CONTROLS (swapped per mode) -->
+    <div class="controls" id="controls-incline">
+        <div class="control-group">
+            <label>Angle (θ)</label>
+            <div class="val" id="inc-angle-val">30°</div>
+            <input type="range" id="inc-angle" min="1" max="89" value="30" step="1">
+        </div>
+        <div class="control-group">
+            <label>Mass (m)</label>
+            <div class="val" id="inc-mass-val">5 kg</div>
+            <input type="range" id="inc-mass" min="1" max="20" value="5" step="1">
+        </div>
+        <div class="control-group">
+            <label>μ static</label>
+            <div class="val" id="inc-us-val">0.40</div>
+            <input type="range" id="inc-us" min="0" max="1" value="0.4" step="0.01">
+        </div>
+        <div class="control-group">
+            <label>μ kinetic</label>
+            <div class="val" id="inc-uk-val">0.25</div>
+            <input type="range" id="inc-uk" min="0" max="1" value="0.25" step="0.01">
+        </div>
+    </div>
+
+    <div class="controls hidden" id="controls-connected">
+        <div class="control-group">
+            <label>Mass A (kg)</label>
+            <div class="val" id="con-ma-val">3 kg</div>
+            <input type="range" id="con-ma" min="1" max="20" value="3" step="1">
+        </div>
+        <div class="control-group">
+            <label>Mass B (kg)</label>
+            <div class="val" id="con-mb-val">5 kg</div>
+            <input type="range" id="con-mb" min="1" max="20" value="5" step="1">
+        </div>
+        <div class="control-group">
+            <label>μ kinetic</label>
+            <div class="val" id="con-uk-val">0.20</div>
+            <input type="range" id="con-uk" min="0" max="1" value="0.2" step="0.01">
+        </div>
+        <div class="control-group">
+            <label>Applied Force (N)</label>
+            <div class="val" id="con-f-val">20 N</div>
+            <input type="range" id="con-f" min="0" max="100" value="20" step="1">
+        </div>
+    </div>
+
+    <div class="controls hidden" id="controls-spring">
+        <div class="control-group">
+            <label>Spring Constant (k)</label>
+            <div class="val" id="spr-k-val">50 N/m</div>
+            <input type="range" id="spr-k" min="10" max="200" value="50" step="5">
+        </div>
+        <div class="control-group">
+            <label>Mass (kg)</label>
+            <div class="val" id="spr-m-val">2 kg</div>
+            <input type="range" id="spr-m" min="1" max="20" value="2" step="1">
+        </div>
+        <div class="control-group">
+            <label>Displacement (m)</label>
+            <div class="val" id="spr-x-val">0.3 m</div>
+            <input type="range" id="spr-x" min="-1" max="1" value="0.3" step="0.05">
+        </div>
+    </div>
+
+    <div class="controls hidden" id="controls-circular">
+        <div class="control-group">
+            <label>Mass (kg)</label>
+            <div class="val" id="cir-m-val">2 kg</div>
+            <input type="range" id="cir-m" min="1" max="20" value="2" step="1">
+        </div>
+        <div class="control-group">
+            <label>Radius (m)</label>
+            <div class="val" id="cir-r-val">1.5 m</div>
+            <input type="range" id="cir-r" min="0.5" max="5" value="1.5" step="0.1">
+        </div>
+        <div class="control-group">
+            <label>Speed (m/s)</label>
+            <div class="val" id="cir-v-val">3.0 m/s</div>
+            <input type="range" id="cir-v" min="0.5" max="10" value="3" step="0.1">
+        </div>
+    </div>
+
+    <!-- CANVAS -->
+    <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="canvas" height="380"></canvas>
+    </div>
+
+    <!-- ACTION BUTTONS (per mode) -->
+    <div class="action-row hidden" id="actions-incline"></div>
+    <div class="action-row hidden" id="actions-connected"></div>
+    <div class="action-row hidden" id="actions-spring">
+        <button class="action-btn primary" id="btn-spr-release">▶ Release</button>
+        <button class="action-btn" id="btn-spr-reset">↺ Reset</button>
+    </div>
+    <div class="action-row hidden" id="actions-circular">
+        <button class="action-btn primary" id="btn-cir-cut">✂ Cut String</button>
+        <button class="action-btn" id="btn-cir-reset">↺ Reset</button>
+    </div>
+
+    <!-- FORMULA BOX (moved up, just below canvas) -->
+    <div class="formula-box" id="formula-box"></div>
+
+    <!-- STATS -->
+    <div class="stats" id="stats-row"></div>
+
+</div>
+
+<script src="./js/newtons-sim.js"></script>
+</body>
+</html>
