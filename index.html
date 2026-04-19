@@ -1,109 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>penguin</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="./assets/penguin2.png">
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="./css/mediaqueries.css">
+    <title>penguin</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./assets/penguin2.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/mediaqueries.css">
 </head>
 
-<body> 
+<body>
 
-    <nav id="desktop-nav">
-        <div class="logo">penguin</div>
-        <div>
-            <ul class="nav-links">
-                <li><a href="#hero">home</a></li>
-                <li><a href="#content">content</a></li>
-                <li><a href="#contact">contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="page-grid">
 
-    <section id="hero">
-        <div class="character-container">
-            <img class="character" src="./assets/penguin.png"
-            alt="this is a picture of a penguin (logo)">
-        </div>
-        <div class="hero_text-container">
-            <h1 class="hero_text"> 
-            Made by a student,
-            <br>
-            for students.
-            </h1>
-        </div>
-    </section>
-
-    <section id="content">
-        <h1 class="title_1">content</h1>
-        <div class="content-container">
-            <div class="sim-container">
-                <a href="./kinematics-sim.html"
-                    target="_blank"
-                    title="kinematics simulator">
-                    <img src="./assets/simulator.png" alt="Kinematics Simulator preview" class="sim-preview">
-                    <span class="sim-label">Kinematics Simulator</span>
-                </a>
+        <section id="hero">
+            <div class="hero-top">
+                <div class="character-container">
+                    <img class="character" src="./assets/penguin.png"
+                    alt="this is a picture of a penguin (logo)">
+                </div>
+                <div class="hero_text-container">
+                    <h1 class="hero_text">
+                    Made by a student,
+                    <br>
+                    for students.
+                    </h1>
+                </div>
             </div>
-            <div class="notes-container">
-                <div class="intro-container">
-                    <a href="./assets/INTRO TO PHYSICS.pdf"
-                            target="_blank"
-                            title="intro to physics notes"
-                            type="application/pdf">
-                            Intro to Physics
-                    </a>
-                </div>
-                <div class="kinematics-container">
-                    <a href="./assets/KINEMATICS.pdf"
-                            target="_blank"
-                            title="kinematics notes"
-                            type="application/pdf">
-                            Kinematics
-                    </a>
-                </div>
-                <div class="applications-nlaw-container">
-                    <a href="./assets/APPLICATIONS OF NEWTONS LAW.pdf"
+            <div class="updates-container">
+                <span class="updates-label">latest updates</span>
+                <ul class="updates-list">
+                    <li>Added Kinematics Simulator with air resistance, compare mode & more</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="contact-left">
+                <h1 class="title_2">Contact</h1>
+                <div class="contact-container">
+                    <div class="email-container">
+                        <a href="mailto:learningwithapenguin@gmail.com"
                         target="_blank"
-                        title="applications of newton's laws notes"
-                        type="application/pdf">
-                        Applications of Newton's Laws  
+                        title="email me">
+                            <img src="./assets/email.png" alt="email" class="contact-icon">
+                            email
+                        </a>
+                    </div>
+                    │
+                    <div class="tiktok-container">
+                        <a href="https://www.tiktok.com/@learningwithapenguin"
+                        target="_blank"
+                        title="watch my tiktoks">
+                            <img src="./assets/tiktok.png" alt="tiktok" class="contact-icon">
+                            tiktok
+                        </a>
+                    </div>
+                </div>
+                <p class="icon-attribution">Icons by <a href="https://www.flaticon.com" target="_blank" title="Flaticon">Freepik – Flaticon</a></p>
+            </div>
+            <div class="contact-right">
+                <p class="about-text">A university student sharing physics notes and tools to make learning easier!</p>
+                <div class="studying-badge">📖 currently: battling gauss' law</div>
+            </div>
+        </section>
+
+        <section id="content">
+            <h1 class="title_1">Content</h1>
+            <div class="content-container">
+                <div class="sim-container">
+                    <a href="./kinematics-sim.html"
+                        target="_blank"
+                        title="kinematics simulator">
+                        <div class="sim-image-wrap">
+                            <img src="./assets/simulator.png" alt="Kinematics Simulator preview" class="sim-preview">
+                        </div>
+                        <div class="sim-info">
+                            <span class="sim-title">Kinematics Simulator</span>
+                            <span class="sim-desc">Projectile motion simulator — equations seen in kinematics notes used!</span>
+                        </div>
                     </a>
                 </div>
-                <div class="extra">
-                    (more coming soon!)
+                <div class="notes-container">
+                    <div class="intro-container">
+                        <a href="./assets/INTRO TO PHYSICS.pdf"
+                                target="_blank"
+                                title="intro to physics notes"
+                                type="application/pdf">
+                                Intro to Physics
+                        </a>
+                    </div>
+                    <div class="kinematics-container">
+                        <a href="./assets/KINEMATICS.pdf"
+                                target="_blank"
+                                title="kinematics notes"
+                                type="application/pdf">
+                                Kinematics
+                        </a>
+                    </div>
+                    <div class="applications-nlaw-container">
+                        <a href="./assets/APPLICATIONS OF NEWTONS LAW.pdf"
+                            target="_blank"
+                            title="applications of newton's laws notes"
+                            type="application/pdf">
+                            Applications of Newton's Laws
+                        </a>
+                    </div>
+                    <div class="extra">
+                        (more coming soon!)
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact">
-        <h1 class="title_2">contact</h1>
-        <div class="contact-container">
-            <div class="email-container">
-                <a
-                href="mailto:learningwithapenguin@gmail.com"
-                target="_blank"
-                title="email me">
-                email
-                </a>
-            </div>
-                │
-            <div class="tiktok-container">
-                <a
-                href="https://www.tiktok.com/@learningwithapenguin"
-                target="_blank"
-                title="watch my tiktoks">
-                tiktok
-                </a>
-            </div>
-        </div>
-    </section>
-
-<script src="./js/sections.js"></script>
+    </div>
 
 </body>
-
 </html>
