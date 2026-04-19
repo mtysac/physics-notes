@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinematics Simulator — penguin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/simulator.css">
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">penguin</div>
+    <div class="nav-back"><a href="./index.html">← back</a></div>
+</nav>
+
+<header>
+    <h1>Kinematics Simulator</h1>
+    <p>projectile motion — click the canvas to set angle, or use the sliders</p>
+</header>
+
+<div class="sim-wrapper">
+
+    <div class="btn-row">
+        <button class="primary" id="btn-launch">▶ Launch</button>
+        <button id="btn-pause" disabled>⏸ Pause</button>
+        <button id="btn-reset">↺ Reset</button>
+        <button id="btn-clear">🗑 Clear Trails</button>
+    </div>
+
+    <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="canvas" height="380"></canvas>
+        <div class="canvas-hint">click canvas to set launch angle &nbsp;|&nbsp; space = launch/pause</div>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-label">Time</div>
+            <div class="stat-value" id="s-time">0.00<span class="stat-unit">s</span></div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Horizontal Δx</div>
+            <div class="stat-value" id="s-dx">0.0<span class="stat-unit">m</span></div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Vertical Δy</div>
+            <div class="stat-value" id="s-dy">0.0<span class="stat-unit">m</span></div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Speed</div>
+            <div class="stat-value" id="s-speed">0.0<span class="stat-unit">m/s</span></div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">Peak Height</div>
+            <div class="stat-value" id="s-peak">—</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Initial Speed (v₀)</label>
+            <div class="val" id="v-display">30 m/s</div>
+            <input type="range" id="v0" min="5" max="60" value="30" step="1">
+        </div>
+        <div class="control-group">
+            <label>Launch Angle (θ)</label>
+            <div class="val" id="a-display">45°</div>
+            <input type="range" id="angle" min="1" max="89" value="45" step="1">
+        </div>
+        <div class="control-group">
+            <label>Initial Height (y₀)</label>
+            <div class="val" id="h-display">0 m</div>
+            <input type="range" id="height0" min="0" max="50" value="0" step="1">
+        </div>
+        <div class="control-group">
+            <label>Gravity (g)</label>
+            <div class="val" id="g-display">9.8 m/s²</div>
+            <input type="range" id="gravity" min="1" max="25" value="9.8" step="0.1">
+        </div>
+    </div>
+
+    <div class="controls-half">
+        <div class="control-group">
+            <label>Simulation Speed</label>
+            <div class="val" id="spd-display">1.0×</div>
+            <input type="range" id="simspeed" min="0.1" max="3" value="1" step="0.1">
+        </div>
+        <div class="control-group options-group">
+            <label>Options</label>
+            <div class="toggles">
+                <button class="toggle-btn" id="tog-drag">Air Resistance</button>
+                <button class="toggle-btn active" id="tog-components">Show vₓ / vᵧ</button>
+                <button class="toggle-btn active" id="tog-compare">Compare Mode</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="did-you-know" id="dyk">💡 <span>Did you know?</span> At 45° the range is maximised on flat ground.</div>
+
+    <div class="legend" id="legend-row"></div>
+
+    <div class="formulas">
+        <div class="formula">Horizontal: <span>x = v₀·cos(θ)·t</span></div>
+        <div class="formula">Vertical: <span>y = y₀ + v₀·sin(θ)·t − ½g·t²</span></div>
+        <div class="formula">vₓ = <span>v₀·cos(θ)</span> (constant, no drag)</div>
+        <div class="formula">vᵧ = <span>v₀·sin(θ) − g·t</span></div>
+        <div class="formula">Max height: <span>H = y₀ + v₀²·sin²(θ) / 2g</span></div>
+        <div class="formula">Range: <span>R = v₀²·sin(2θ) / g</span> (y₀=0, no drag)</div>
+    </div>
+
+</div>
+
+<script src="./js/simulator.js"></script>
+</body>
+</html>

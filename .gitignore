@@ -1,0 +1,6 @@
+# editor
+.vscode/
+
+# Windows OS
+Thumbs.db
+desktop.ini

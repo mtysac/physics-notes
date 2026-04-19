@@ -40,14 +40,28 @@
         text-align: center;
     }
 
+    /* stack sim + notes vertically on mobile */
     .content-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
         font-size: 3vh;
+    }
+
+    .sim-container {
+        flex: unset;
+        width: 80vw;
+        min-height: 20vh;
+    }
+
+    .notes-container {
+        width: 80vw;
     }
 
     .intro-container,
     .kinematics-container,
-    .Applications-NLaw-container {
-        width: 72vw;
+    .applications-nlaw-container {
+        width: 100%;
     }
 
     .contact-container {
