@@ -40,9 +40,10 @@ a:hover { opacity: 0.7; }
     grid-template-areas:
         "hero    contact"
         "content content";
-    min-height: 100vh;
+    height: 100vh;
     gap: 1.5rem;
     padding: 1.5rem;
+    overflow: hidden;
 }
 
 /* section titles */
@@ -67,6 +68,8 @@ a:hover { opacity: 0.7; }
     flex-direction: column;
     gap: 1rem;
     animation: fadeUp 0.7s ease both;
+    min-height: 0;
+    overflow: auto;
 }
 
 .hero-top {
@@ -145,6 +148,7 @@ a:hover { opacity: 0.7; }
     align-items: center;
     gap: 2rem;
     animation: fadeUp 0.7s ease 0.1s both;
+    min-height: 0;
 }
 
 .contact-left {
@@ -203,9 +207,10 @@ a:hover { opacity: 0.7; }
 }
 
 .contact-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 .icon-attribution {
@@ -240,6 +245,8 @@ a:hover { opacity: 0.7; }
     border-radius: 1.2rem;
     padding: 2rem;
     animation: fadeUp 0.7s ease 0.2s both;
+    overflow: auto;
+    min-height: 0;
 }
 
 .content-container {
