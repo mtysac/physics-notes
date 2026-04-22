@@ -1,6 +1,6 @@
 # learning with a penguin
 
-a website i made to share my physics notes and some interactive simulators. made it mostly for myself but figured it could be useful for other students too!
+a website i made to share my physics notes and some interactive simulators. started it mostly so I could refer to notes with no storage limit but figured it could be useful for other students too!
 
 ## what's on the site
 
@@ -15,11 +15,27 @@ a website i made to share my physics notes and some interactive simulators. made
 
 ## stack
 
-html, css, and javascript. no frameworks and no build tools
+- html
+- css
+- javascript
 
 ## running it
 
-open `index.html` in a browser, that's it
+open `index.html` in a browser
+
+## how it works
+
+the site is a single page layout — no routing, no backend, everything is static.
+
+`index.html` is the main page. it uses a css grid to split into three sections: hero (top left), contact (top right), and content (bottom). on mobile it stacks vertically via a media query.
+
+the two simulators are separate html pages (`kinematics-sim.html` and `newtons-sim.html`), each with their own css and js files. all the physics and drawing is done on an html canvas using the 2d context api.
+
+**kinematics simulator** (`js/kinematics-sim.js`) — runs projectile motion. physics is solved analytically when there's no drag, or numerically with euler integration when air resistance is on. the penguin is drawn with `drawImage` and rotated each frame to match the velocity vector angle.
+
+**newton's laws simulator** (`js/newtons-sim.js`) — four modes sharing the same canvas and ui. each mode has its own draw and physics functions. the spring uses euler integration with a damping term to simulate oscillation. circular motion runs a continuous `requestAnimationFrame` loop. inclined plane and connected objects are static and just redraw on slider input.
+
+styling is split across `css/style.css` (main page), `css/mediaqueries.css` (mobile breakpoints), `css/kinematics-sim.css`, and `css/newtons-sim.css`.
 
 ## notes
 
