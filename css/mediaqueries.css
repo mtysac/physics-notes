@@ -42,13 +42,13 @@
         align-items: center;
     }
 
-    .sim-container,
+    .kinematics-sim-card,
     .newtons-sim-container {
         flex: unset;
         width: 100%;
     }
 
-    .sim-container a,
+    .kinematics-sim-card a,
     .newtons-sim-container a { width: 100%; }
 
     .sim-image-wrap { min-height: 44vw; }
