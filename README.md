@@ -1,6 +1,10 @@
 # learning with a penguin
 
-a website i made to share my physics notes and some interactive simulators. started it mostly so I could refer to notes with no storage limit but figured it could be useful for other students too!
+a website i made to share my physics notes and some interactive simulators. started it mostly so i could refer to notes without storage limits but figured it could be useful for other students too.
+
+**live site:** https://mtysac.github.io/physics-notes/
+
+![screenshot of the website](assets/ss-of-web.png)
 
 ## what's on the site
 
@@ -19,10 +23,6 @@ a website i made to share my physics notes and some interactive simulators. star
 - css
 - javascript
 
-## running it
-
-open `index.html` in a browser
-
 ## how it works
 
 the site is a single page layout — no routing, no backend, everything is static.
@@ -37,6 +37,14 @@ the two simulators are separate html pages (`kinematics-sim.html` and `newtons-s
 
 styling is split across `css/style.css` (main page), `css/mediaqueries.css` (mobile breakpoints), `css/kinematics-sim.css`, and `css/newtons-sim.css`.
 
+## running it locally
+
+open `index.html` in a browser, that's it.
+
 ## notes
 
-still adding topics as i go through my courses. if something's wrong or missing feel free reach out!
+still adding topics as i go through my courses. if something's wrong or missing feel free to reach out.
+
+## license
+
+[MIT](LICENSE)
