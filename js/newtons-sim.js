@@ -133,24 +133,9 @@ function drawInclineAt(pos) {
 
 function drawIncline() { drawInclineAt(incPos); }
 
-function startInclineAnim() {
-    if (incAnim) return;
-    function tick() {
-        const p = getIncline();
-        if (!p.sliding) { stopInclineAnim(); drawInclineAt(incPos); return; }
-        incPos += p.a * 0.0008;
-        if (incPos >= 1) { incPos = 1; stopInclineAnim(); drawInclineAt(1); return; }
-        drawInclineAt(incPos);
-        incAnim = requestAnimationFrame(tick);
-    }
-    incAnim = requestAnimationFrame(tick);
-}
-
 function stopInclineAnim() {
     if (incAnim) { cancelAnimationFrame(incAnim); incAnim = null; }
 }
-
-function resetIncline() { stopInclineAnim(); incPos = 0.15; drawInclineAt(incPos); }
 
 // ── CONNECTED OBJECTS ─────────────────────────────────────────────────────────
 let conAnim = null, conOffset = 0, conRunning = false;
@@ -224,26 +209,10 @@ function drawConnectedAt(offset) {
 
 function drawConnected() { drawConnectedAt(conOffset); }
 
-function startConAnim() {
-    if (conAnim) return;
-    conRunning = true;
-    function tick() {
-        const p = getConnected();
-        if (p.a <= 0) { stopConAnim(); drawConnectedAt(conOffset); return; }
-        conOffset += p.a * 0.4;
-        if (conOffset > W()*0.35) conOffset = -W()*0.35;
-        drawConnectedAt(conOffset);
-        conAnim = requestAnimationFrame(tick);
-    }
-    conAnim = requestAnimationFrame(tick);
-}
-
 function stopConAnim() {
     if (conAnim) { cancelAnimationFrame(conAnim); conAnim = null; }
     conRunning = false;
 }
-
-function resetCon() { stopConAnim(); conOffset=0; drawConnectedAt(0); }
 
 // ── SPRING ────────────────────────────────────────────────────────────────────
 let sprAnim=null, sprX=0, sprV=0, sprRunning=false;

@@ -1,0 +1,26 @@
+{
+  "name": "009_physics_tutor_html",
+  "version": "1.0.0",
+  "description": "a website i made to share my physics notes and some interactive simulators. started it mostly so i could refer to notes without storage limits but figured it could be useful for other students too.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint js/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtysac/physics-notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mtysac/physics-notes/issues"
+  },
+  "homepage": "https://github.com/mtysac/physics-notes#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1"
+  }
+}

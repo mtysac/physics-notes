@@ -58,7 +58,7 @@ function toScreen(x, y) {
 function updateDYK() {
     const deg = Math.round(parseFloat(document.getElementById('angle').value));
     const dyk = document.getElementById('dyk');
-    let msg = '';
+    let msg = ''; // eslint-disable-line no-useless-assignment
     if (deg === 45)      msg = 'At <span>45°</span> the range is maximised on flat ground.';
     else if (deg < 20)   msg = 'Very shallow angles give a low, fast trajectory — great for skipping stones!';
     else if (deg > 70)   msg = 'Steep angles maximise height but sacrifice range.';
@@ -209,7 +209,6 @@ function drawStatic() {
 
 function drawBall(px, py, curVx, curVy) {
     const [sx, sy] = toScreen(px, py);
-    const speed = Math.sqrt(curVx * curVx + curVy * curVy);
     if (showComps) {
         const sc = 2.8;
         ctx.beginPath(); ctx.strokeStyle = 'rgba(80,120,200,0.85)'; ctx.lineWidth = 1.5;
