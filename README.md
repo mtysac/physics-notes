@@ -48,6 +48,8 @@ npm install
 npm run lint
 ```
 
+eslint is used to catch unused variables, potential bugs, and keep the js consistent across files. it doesn't change anything but flags issues.
+
 ## notes
 
 still adding topics as i go through my courses. if something's wrong or missing feel free to reach out.
