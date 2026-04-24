@@ -22,6 +22,7 @@ a website i made to share my physics notes and some interactive simulators. star
 - html
 - css
 - javascript
+- eslint (dev)
 
 ## how it works
 
@@ -40,6 +41,12 @@ styling is split across `css/style.css` (main page), `css/mediaqueries.css` (mob
 ## running it locally
 
 open `index.html` in a browser, that's it.
+
+to run the linter:
+```bash
+npm install
+npm run lint
+```
 
 ## notes
 
