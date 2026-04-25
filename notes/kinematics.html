@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinematics — penguin</title>
+    <link rel="icon" type="image/png" href="../assets/penguin2.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+    <link rel="stylesheet" href="notes.css">
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">penguin</div>
+    <div class="nav-back"><a href="../index.html">← back</a></div>
+</nav>
+
+<main>
+    <h1>Kinematics</h1>
+
+    <!-- SCALARS VS VECTORS -->
+    <section>
+        <h2>Scalars vs Vectors</h2>
+        <table>
+            <thead>
+                <tr><th>Scalars</th><th>Vectors</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Magnitude only</td><td>Magnitude AND Direction</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- QUANTITIES -->
+    <section>
+        <h2>Quantities</h2>
+        <table>
+            <thead>
+                <tr><th>Quantity</th><th>SI Unit</th><th>Definition</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Distance (scalar)</td>
+                    <td>m</td>
+                    <td>Length travelled</td>
+                </tr>
+                <tr>
+                    <td>Displacement (vector)</td>
+                    <td>m</td>
+                    <td>Length travelled with respect to direction</td>
+                </tr>
+                <tr>
+                    <td>Speed (scalar)</td>
+                    <td>\(\text{m/s}\) or \(\text{m s}^{-1}\)</td>
+                    <td>Rate of change of distance</td>
+                </tr>
+                <tr>
+                    <td>Velocity (vector)</td>
+                    <td>\(\text{m/s}\) or \(\text{m s}^{-1}\)</td>
+                    <td>Rate of change of displacement</td>
+                </tr>
+                <tr>
+                    <td>Acceleration (vector)</td>
+                    <td>\(\text{m/s}^2\) or \(\text{m s}^{-2}\)</td>
+                    <td>Rate of change of velocity</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- FORMULAS -->
+    <section>
+        <h2>Formulas</h2>
+        <div class="formula-grid">
+            <div class="formula-cell">\(\displaystyle v = \frac{\Delta x}{t}\)</div>
+            <div class="formula-cell">\(\displaystyle s = \frac{d}{t}\)</div>
+            <div class="formula-cell">\(\Delta x = V_1 t + at^2\)</div>
+            <div class="formula-cell">\(V_2 = V_1 + at\)</div>
+            <div class="formula-cell">\(\displaystyle a = \frac{V_F - V_I}{t}\)</div>
+            <div class="formula-cell">\(\displaystyle \Delta x = \frac{1}{2}(V_1 + V_2)t\)</div>
+            <div class="formula-cell">\(V_2^2 = V_1^2 + 2a\Delta x\)</div>
+            <div class="formula-cell">\(V_{12} = V_{1E} - V_{2E}\)</div>
+            <div class="formula-cell">\(V_{AC} = V_{AB} + V_{BC}\)</div>
+        </div>
+    </section>
+
+    <!-- LEGEND -->
+    <section>
+        <h2>Variable Key</h2>
+        <div class="legend-grid">
+            <div>\(v\) = velocity</div>
+            <div>\(s\) = speed</div>
+            <div>\(d\) = distance</div>
+            <div>\(\Delta x\) = displacement (some may use \(d\))</div>
+            <div>\(t\) = time</div>
+            <div>\(a\) = acceleration</div>
+            <div>\(V_F = V_2\) = Final Velocity</div>
+            <div>\(V_I = V_1\) = Initial Velocity</div>
+            <div>\(a = g = 9.81\ \text{m/s}^2\)</div>
+            <div>\(1\ \text{m/s} = 3.6\ \text{km/h}\)</div>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>

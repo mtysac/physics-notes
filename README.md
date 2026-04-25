@@ -8,7 +8,7 @@ a website i made to share my physics notes and some interactive simulators. star
 
 ## what's on the site
 
-**notes**
+**notes** (notes written in onenote and notion while there is notes file with html pages written with KaTeX math rendering)
 - intro to physics
 - kinematics
 - applications of newton's laws
@@ -36,7 +36,7 @@ the two simulators are separate html pages (`kinematics-sim.html` and `newtons-s
 
 **newton's laws simulator** (`js/newtons-sim.js`) — four modes sharing the same canvas and ui. each mode has its own draw and physics functions. the spring uses euler integration with a damping term to simulate oscillation. circular motion runs a continuous `requestAnimationFrame` loop. inclined plane and connected objects are static and just redraw on slider input.
 
-styling is split across `css/style.css` (main page), `css/mediaqueries.css` (mobile breakpoints), `css/kinematics-sim.css`, and `css/newtons-sim.css`.
+styling is split across `css/style.css` (main page), `css/mediaqueries.css` (mobile breakpoints), `css/kinematics-sim.css`, `css/newtons-sim.css`, and `notes/notes.css` (shared notes stylesheet).
 
 ## running it locally
 

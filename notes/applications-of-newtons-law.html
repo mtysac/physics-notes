@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications of Newton's Law — penguin</title>
+    <link rel="icon" type="image/png" href="../assets/penguin2.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });">
+    </script>
+    <link rel="stylesheet" href="notes.css">
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">penguin</div>
+    <div class="nav-back"><a href="../index.html">← back</a></div>
+</nav>
+
+<main>
+    <h1>Applications of Newton's Law</h1>
+
+    <!-- FRICTIONAL FORCES -->
+    <section>
+        <h2>Frictional Forces</h2>
+        <table>
+            <thead>
+                <tr><th>Type</th><th>Condition</th><th>Formula</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Static Friction</td>
+                    <td>\(0 \leq f_s \leq \mu_s N\)</td>
+                    <td>\(f_s = \mu_s N\)</td>
+                </tr>
+                <tr>
+                    <td>Kinetic Friction</td>
+                    <td>\(f_k < f_s\) always</td>
+                    <td>\(f_k = \mu_k N\)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- EQUILIBRIUM -->
+    <section>
+        <h2>Equilibrium</h2>
+        <p>net force = zero</p>
+        <p>$$\sum \vec{F} = 0, \quad \sum \vec{F}_x = 0 \quad \text{and} \quad \sum \vec{F}_y = 0$$</p>
+    </section>
+
+    <!-- NON-EQUILIBRIUM -->
+    <section>
+        <h2>Non-Equilibrium</h2>
+        <p>net force ≠ 0</p>
+        <p>$$\sum \vec{F} = m\vec{a}, \quad \sum \vec{F}_x = m\vec{a} \quad \text{and} \quad \sum \vec{F}_y = m\vec{a}$$</p>
+    </section>
+
+    <!-- HOOKE'S LAW -->
+    <section>
+        <h2>Springs: Hooke's Law</h2>
+        <p>$$F = -kx$$</p>
+        <p>\(|k| = \dfrac{F}{x}\), F is N, x is m</p>
+    </section>
+
+    <!-- TENSION -->
+    <section>
+        <h2>Tension</h2>
+        <div class="two-col">
+            <div class="col-main">
+                <p><strong>The whole system</strong></p>
+                <p>$$\sum \vec{F} = W - W + W - W$$</p>
+                <p>$$\sum \vec{F} = 0$$</p>
+                <p><strong>Just the rope</strong></p>
+                <p>$$\sum \vec{F} = W - W = 0$$</p>
+                <ul>
+                    <li>on its own there is a counteracting force applied to it</li>
+                    <li>similar to a normal force</li>
+                </ul>
+                <p>No acceleration (object at constant speed)</p>
+                <p>$$\vec{T} - ma = 0, \quad \vec{T} = ma$$</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONNECTED OBJECTS -->
+    <section>
+        <h2>Connected Objects</h2>
+        <p>Forces acting on two boxes, no friction:</p>
+        <div class="formula-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="formula-cell">\(T_2 = (m_A + m_B)a\)</div>
+            <div class="formula-cell">\(\therefore T_1 = m_A a = \dfrac{m_A T_2}{m_A + m_B}\)</div>
+            <div class="formula-cell">Comparing the tension: \(T_1 < T_2\)</div>
+            <div class="formula-cell">Sum of forces never changes as long as total mass stays the same</div>
+        </div>
+    </section>
+
+    <!-- CIRCULAR MOTION -->
+    <section>
+        <h2>Circular Motion</h2>
+        <p>Centripetal acceleration:</p>
+        <p>$$a_C = \frac{v^2}{R}$$</p>
+        <p>$$\therefore T = ma = m\frac{v^2}{R}$$</p>
+    </section>
+
+</main>
+</body>
+</html>

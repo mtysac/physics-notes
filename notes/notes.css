@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Pixelify+Sans:wght@400..700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    background: #ffffff;
+    font-family: "Poppins", sans-serif;
+    color: #1a1a1a;
+    font-size: 14px;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────────────── */
+nav {
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 56px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 2rem;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    z-index: 100;
+}
+
+.nav-logo { font-size: 1rem; cursor: default; }
+
+.nav-back a {
+    font-size: 0.9rem; color: #1a1a1a; text-decoration: none;
+    position: relative; padding-bottom: 2px;
+}
+
+.nav-back a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0;
+    width: 0%; height: 1.5px; background: #1a1a1a;
+    transition: width 0.25s ease;
+}
+
+.nav-back a:hover::after { width: 100%; }
+
+/* ── MAIN ────────────────────────────────────────────────────────────────── */
+main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ── HEADINGS ────────────────────────────────────────────────────────────── */
+h1 {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    color: rgb(59, 68, 83);
+}
+
+h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+/* ── SECTIONS ────────────────────────────────────────────────────────────── */
+section {
+    background: #f0f0f0;
+    border-radius: 1rem;
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+p { line-height: 1.75; }
+
+.note {
+    font-size: 0.82rem;
+    color: #777;
+    font-style: italic;
+}
+
+/* ── TABLES ──────────────────────────────────────────────────────────────── */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background: #ffffff;
+    border-radius: 0.6rem;
+    overflow: hidden;
+}
+
+thead tr { background: rgb(59, 68, 83); color: #ffffff; }
+
+thead th {
+    padding: 0.55rem 1rem;
+    text-align: left;
+    font-weight: 500;
+}
+
+tbody tr:nth-child(even) { background: #f9f9f9; }
+
+tbody td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+/* ── LISTS ───────────────────────────────────────────────────────────────── */
+ul {
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    list-style: none;
+}
+
+ul li { padding-left: 1rem; position: relative; }
+ul li::before { content: '–'; position: absolute; left: 0; color: #aaa; }
+
+ul.plain li::before { content: '+'; color: #888; }
+
+.highlight { color: rgb(59, 68, 83); font-weight: 600; }
+
+.era { font-weight: 600; font-size: 0.9rem; color: #555; }
+
+/* ── TWO COLUMN ──────────────────────────────────────────────────────────── */
+.two-col {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.col-main { flex: 1; display: flex; flex-direction: column; gap: 0.6rem; }
+.col-side  { flex: 0 0 auto; }
+
+/* ── FORMULA GRID ────────────────────────────────────────────────────────── */
+.formula-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.8rem;
+}
+
+.formula-cell {
+    background: #ffffff;
+    border-radius: 0.6rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── LEGEND GRID ─────────────────────────────────────────────────────────── */
+.legend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 2rem;
+    font-size: 0.88rem;
+    line-height: 1.8;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+    h1 { font-size: 1.9rem; }
+    .two-col { flex-direction: column; }
+    .col-side { width: 100%; }
+    .formula-grid { grid-template-columns: 1fr 1fr; }
+    .legend-grid  { grid-template-columns: 1fr; }
+    tbody td, thead th { padding: 0.45rem 0.6rem; font-size: 0.82rem; }
+}
