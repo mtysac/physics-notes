@@ -1,5 +1,9 @@
 # learning with a penguin
 
+[![Live Site](https://img.shields.io/badge/live-site-blue)](https://mtysac.github.io/physics-notes/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Lint](https://github.com/mtysac/physics-notes/actions/workflows/lint.yml/badge.svg)](https://github.com/mtysac/physics-notes/actions/workflows/lint.yml)
+
 a website i made to share my physics notes and some interactive simulators. started it mostly so i could refer to notes without storage limits but figured it could be useful for other students too.
 
 **live site:** https://mtysac.github.io/physics-notes/
@@ -53,6 +57,10 @@ eslint is used to catch unused variables, potential bugs, and keep the js consis
 ## notes
 
 still adding topics as i go through my courses. if something's wrong or missing feel free to reach out.
+
+## contributing
+
+see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## license
 
