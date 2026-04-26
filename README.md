@@ -6,13 +6,13 @@
 
 a website i made to share my physics notes and some interactive simulators. started it mostly so i could refer to notes without storage limits but figured it could be useful for other students too.
 
-**live site:** https://mtysac.github.io/physics-notes/
+**live site:** https://learningwithapenguin.vercel.app/
 
 ![screenshot of the website](assets/ss-of-web.png)
 
 ## what's on the site
 
-**notes** (notes written in onenote and notion while there is notes file with html pages written with KaTeX math rendering)
+**notes** (notes written in onenote and notion but there is a notes file with html pages written with KaTeX)
 - intro to physics
 - kinematics
 - applications of newton's laws
