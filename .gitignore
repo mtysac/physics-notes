@@ -12,3 +12,6 @@ npm-debug.log*
 
 # eslint cache
 .eslintcache
+
+CONTRIBUTING.md
+CHANGELOG.md

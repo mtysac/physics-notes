@@ -57,10 +57,14 @@ eslint is used to catch unused variables, potential bugs, and keep the js consis
 ## notes
 
 still adding topics as i go through my courses. if something's wrong or missing feel free to reach out.
-
+<!-- 
 ## contributing
 
 see [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## changelog
+
+see [CHANGELOG.md](CHANGELOG.md) -->
 
 ## license
 

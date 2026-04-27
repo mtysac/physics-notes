@@ -2,13 +2,6 @@ const canvas = document.getElementById('canvas');
 const ctx    = canvas.getContext('2d');
 const wrap   = document.getElementById('canvas-wrap');
 
-function resizeCanvas() {
-    canvas.width  = wrap.clientWidth;
-    canvas.height = Math.min(400, wrap.clientWidth * 0.46);
-}
-resizeCanvas();
-window.addEventListener('resize', () => { resizeCanvas(); if (!running) drawStatic(); });
-
 const COLORS = [
     'rgba(186,186,191,0.9)',
     'rgba(200,140,80,0.9)',
@@ -30,6 +23,15 @@ const penguinImg = new Image();
 penguinImg.src = './assets/penguin.png';
 penguinImg.onload = () => { if (!running) drawStatic(); };
 
+/** Resizes the canvas to match the wrapper element's current dimensions. */
+function resizeCanvas() {
+    canvas.width  = wrap.clientWidth;
+    canvas.height = Math.min(400, wrap.clientWidth * 0.46);
+}
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); if (!running) drawStatic(); });
+
+/** Reads all simulation input values from the DOM and computes derived quantities. */
 function getParams() {
     v0       = parseFloat(document.getElementById('v0').value);
     angleRad = parseFloat(document.getElementById('angle').value) * Math.PI / 180;
@@ -42,6 +44,7 @@ function getParams() {
     maxHeight = h0 + (vy0 * vy0) / (2 * g);
 }
 
+/** Computes the pixel scale and canvas origin so the full trajectory fits with padding. */
 function setupScale() {
     const W = canvas.width, H = canvas.height, pad = 44;
     const effRange  = Math.max(maxRange, 1);
@@ -51,10 +54,17 @@ function setupScale() {
     originY = H - pad;
 }
 
+/**
+ * Converts physics coordinates (metres) to canvas pixel coordinates.
+ * @param {number} x - Horizontal position in metres.
+ * @param {number} y - Vertical position in metres.
+ * @returns {number[]} Two-element array [screenX, screenY] in pixels.
+ */
 function toScreen(x, y) {
     return [originX + x * scale, originY - y * scale];
 }
 
+/** Updates the "Did You Know?" hint based on the current launch angle and drag setting. */
 function updateDYK() {
     const deg = Math.round(parseFloat(document.getElementById('angle').value));
     const dyk = document.getElementById('dyk');
@@ -69,6 +79,7 @@ function updateDYK() {
     dyk.innerHTML = '💡 ' + msg;
 }
 
+/** Re-renders the compare-mode legend from the current saved trails array. */
 function updateLegend() {
     const row = document.getElementById('legend-row');
     row.innerHTML = '';
@@ -79,6 +90,7 @@ function updateLegend() {
     });
 }
 
+/** Draws a faint background grid aligned to the current scale. */
 function drawGrid() {
     const W = canvas.width, H = canvas.height;
     ctx.strokeStyle = 'rgba(0,0,0,0.06)';
@@ -94,14 +106,13 @@ function drawGrid() {
     }
 }
 
+/** Draws the ground fill, axis lines, labels, and optional launch-height dashed line. */
 function drawAxes() {
     const W = canvas.width, H = canvas.height;
     const [ox, oy] = toScreen(0, 0);
 
-    // green ground fill — from ground line to bottom of canvas
     ctx.fillStyle = '#4caf50';
     ctx.fillRect(0, oy, W, H - oy);
-    // darker top edge
     ctx.fillStyle = '#388e3c';
     ctx.fillRect(0, oy, W, 3);
 
@@ -122,6 +133,7 @@ function drawAxes() {
     }
 }
 
+/** Draws a dashed ghost trajectory showing the full predicted path before or during flight. */
 function drawGhostTrajectory() {
     ctx.beginPath();
     ctx.strokeStyle = 'rgba(0,0,0,0.12)';
@@ -150,6 +162,7 @@ function drawGhostTrajectory() {
     ctx.stroke(); ctx.setLineDash([]);
 }
 
+/** Draws the launch angle arc and direction indicator at the origin. */
 function drawAngleArc() {
     const [ox, oy] = toScreen(0, h0);
     ctx.beginPath();
@@ -167,6 +180,7 @@ function drawAngleArc() {
     ctx.arc(ox, oy, 4, 0, Math.PI * 2); ctx.fill();
 }
 
+/** Draws a dashed horizontal line at the maximum height of the trajectory. */
 function drawMaxHeightLine() {
     const [, sy] = toScreen(0, maxHeight);
     const W = canvas.width;
@@ -178,6 +192,7 @@ function drawMaxHeightLine() {
     ctx.fillText('H = ' + maxHeight.toFixed(1) + 'm', 6, sy - 4);
 }
 
+/** Draws all previously saved comparison trails onto the canvas. */
 function drawSavedTrails() {
     savedTrails.forEach(s => {
         if (s.trail.length < 2) return;
@@ -191,6 +206,7 @@ function drawSavedTrails() {
     });
 }
 
+/** Renders the idle (pre-launch) canvas state with grid, axes, ghost path, and penguin at origin. */
 function drawStatic() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     getParams(); setupScale();
@@ -198,15 +214,22 @@ function drawStatic() {
     drawSavedTrails();
     drawGhostTrajectory(); drawAngleArc();
 
-    // show penguin at launch origin when idle
     const [ox, oy] = toScreen(0, h0);
     const size = 28;
     ctx.save();
     ctx.translate(ox, oy);
     ctx.rotate(-angleRad);
     ctx.drawImage(penguinImg, -size / 2, -size / 2, size, size);
-    ctx.restore();}
+    ctx.restore();
+}
 
+/**
+ * Draws the projectile (penguin) with optional velocity component vectors.
+ * @param {number} px - Current horizontal position in metres.
+ * @param {number} py - Current vertical position in metres.
+ * @param {number} curVx - Current horizontal velocity in m/s.
+ * @param {number} curVy - Current vertical velocity in m/s.
+ */
 function drawBall(px, py, curVx, curVy) {
     const [sx, sy] = toScreen(px, py);
     if (showComps) {
@@ -220,12 +243,10 @@ function drawBall(px, py, curVx, curVy) {
         ctx.fillStyle = 'rgba(80,160,100,0.85)';
         ctx.fillText('vᵧ', sx + 3, sy - curVy * sc - 4);
     }
-    // resultant velocity vector
     ctx.beginPath(); ctx.strokeStyle = 'rgba(200,80,80,0.85)'; ctx.lineWidth = 1.5;
     ctx.moveTo(sx, sy); ctx.lineTo(sx + curVx * 2.8, sy - curVy * 2.8); ctx.stroke();
 
-    // rotate penguin to match velocity direction
-    const angle = Math.atan2(-curVy, curVx); // canvas y is flipped
+    const angle = Math.atan2(-curVy, curVx);
     const size = 28;
     ctx.save();
     ctx.translate(sx, sy);
@@ -237,6 +258,13 @@ function drawBall(px, py, curVx, curVy) {
     ctx.restore();
 }
 
+/**
+ * Renders a single animation frame including the colour-coded trail, projectile, and live stats.
+ * @param {number} px - Current horizontal position in metres.
+ * @param {number} py - Current vertical position in metres.
+ * @param {number} curVx - Current horizontal velocity in m/s.
+ * @param {number} curVy - Current vertical velocity in m/s.
+ */
 function drawFrame(px, py, curVx, curVy) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(); drawAxes(); drawMaxHeightLine();
@@ -266,6 +294,10 @@ function drawFrame(px, py, curVx, curVy) {
 
 let state = { px: 0, py: 0, pvx: 0, pvy: 0 };
 
+/**
+ * Advances the projectile state by one time step using either drag or ideal physics.
+ * @param {number} dt - Time step in seconds.
+ */
 function physicsStep(dt) {
     if (useDrag) {
         const spd = Math.sqrt(state.pvx ** 2 + state.pvy ** 2);
@@ -282,6 +314,8 @@ function physicsStep(dt) {
 }
 
 const BASE_DT = 0.025;
+
+/** Main animation loop — advances physics, records the trail, and stops on landing. */
 function animate() {
     const dt = BASE_DT * simSpeed;
     t += dt;
@@ -314,6 +348,7 @@ function animate() {
     animId = requestAnimationFrame(animate);
 }
 
+/** Starts a new launch or resumes from a paused state. */
 function launch() {
     if (running && !paused) return;
     if (paused) { paused = false; animId = requestAnimationFrame(animate); return; }
@@ -325,6 +360,7 @@ function launch() {
     animId = requestAnimationFrame(animate);
 }
 
+/** Toggles the simulation between paused and running states. */
 function pauseSim() {
     if (!running) return;
     if (!paused) {
@@ -338,6 +374,7 @@ function pauseSim() {
     }
 }
 
+/** Resets the simulation to its initial idle state and redraws the static canvas. */
 function reset() {
     if (animId) cancelAnimationFrame(animId);
     running = false; paused = false; trail = []; t = 0;
@@ -352,6 +389,7 @@ function reset() {
     document.getElementById('s-peak').innerHTML  = '—';
 }
 
+/** Clears all saved comparison trails and refreshes the legend and canvas. */
 function clearTrails() { savedTrails = []; colorIdx = 0; updateLegend(); if (!running) drawStatic(); }
 
 document.getElementById('v0').addEventListener('input', e => {
@@ -375,6 +413,12 @@ document.getElementById('simspeed').addEventListener('input', e => {
     document.getElementById('spd-display').textContent = simSpeed.toFixed(1) + '×';
 });
 
+/**
+ * Wires a toggle button to a getter/setter pair and redraws when toggled.
+ * @param {string} id - DOM id of the toggle button.
+ * @param {Function} getter - Returns the current boolean state.
+ * @param {Function} setter - Accepts the new boolean state.
+ */
 function bindToggle(id, getter, setter) {
     const btn = document.getElementById(id);
     btn.addEventListener('click', () => {
@@ -392,6 +436,12 @@ document.getElementById('btn-pause').addEventListener('click', pauseSim);
 document.getElementById('btn-reset').addEventListener('click', reset);
 document.getElementById('btn-clear').addEventListener('click', clearTrails);
 
+/**
+ * Converts a pointer/touch event into a launch angle relative to the canvas origin.
+ * @param {MouseEvent|TouchEvent} e - The pointer or touch event.
+ * @param {DOMRect} rect - Bounding rect of the canvas element.
+ * @returns {number|null} Angle in degrees (1–89), or null if position is invalid.
+ */
 function getAngleFromEvent(e, rect) {
     const scaleX = canvas.width  / rect.width;
     const scaleY = canvas.height / rect.height;
@@ -406,6 +456,10 @@ function getAngleFromEvent(e, rect) {
     return deg;
 }
 
+/**
+ * Applies a new launch angle to the slider and redraws the static canvas.
+ * @param {number} deg - The angle in degrees to apply.
+ */
 function applyAngle(deg) {
     const slider = document.getElementById('angle');
     slider.value = deg;
@@ -435,7 +489,6 @@ canvas.addEventListener('mousemove', e => {
 canvas.addEventListener('mouseup', () => { isDraggingAngle = false; });
 canvas.addEventListener('mouseleave', () => { isDraggingAngle = false; });
 
-// touch support
 canvas.addEventListener('touchstart', e => {
     if (running && !paused) return;
     e.preventDefault();
@@ -456,7 +509,6 @@ canvas.addEventListener('touchmove', e => {
 }, { passive: false });
 
 canvas.addEventListener('touchend', () => { isDraggingAngle = false; });
-
 
 document.addEventListener('keydown', e => {
     if (e.code === 'Space') { e.preventDefault(); running ? pauseSim() : launch(); }

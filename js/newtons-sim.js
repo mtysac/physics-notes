@@ -9,6 +9,9 @@ const penguinImg = new Image();
 penguinImg.src = './assets/penguin.png';
 penguinImg.onload = () => draw();
 
+/**
+ * resizes the canvas to match the wrapper element's current dimensions
+ */
 function resizeCanvas() {
     canvas.width  = wrap.clientWidth;
     canvas.height = Math.min(400, wrap.clientWidth * 0.46);
@@ -19,6 +22,15 @@ window.addEventListener('resize', () => { resizeCanvas(); draw(); });
 const W = () => canvas.width;
 const H = () => canvas.height;
 
+/**
+ * draws an arrow with an optional label from one canvas point to another:
+ * @param {number} x1 - Start x coordinate in pixels
+ * @param {number} y1 - Start y coordinate in pixels
+ * @param {number} x2 - End x coordinate in pixels
+ * @param {number} y2 - End y coordinate in pixels
+ * @param {string} color - CSS colour string for the arrow
+ * @param {string} [label] - Optional text label drawn near the arrowhead
+ */
 function arrow(x1, y1, x2, y2, color, label) {
     const dx = x2-x1, dy = y2-y1;
     const len = Math.sqrt(dx*dx+dy*dy);
@@ -35,20 +47,46 @@ function arrow(x1, y1, x2, y2, color, label) {
     if (label) { ctx.fillStyle=color; ctx.font='bold 11px Poppins'; ctx.fillText(label,x2+5,y2+4); }
 }
 
+/**
+ * draws a grey ground fill and a darker top edge at the given y position
+ * @param {number} y - The y pixel coordinate of the ground surface
+ */
 function drawGround(y) {
     ctx.fillStyle='#9e9e9e'; ctx.fillRect(0,y,W(),H()-y);
     ctx.fillStyle='#757575'; ctx.fillRect(0,y,W(),3);
 }
 
+/**
+ * returns an HTML string for a single labelled stat card:
+ * @param {string} label - The stat label text
+ * @param {string|number} value - The numeric or text value to display
+ * @param {string} unit - The unit string shown after the value
+ * @returns {string} An HTML snippet for the stat card
+ */
 function stat(label,value,unit) {
     return `<div class="stat"><div class="stat-label">${label}</div><div class="stat-value">${value}<span class="stat-unit">${unit}</span></div></div>`;
 }
+/**
+ * injects HTML into the stats row element
+ * @param {string} html - HTML string to set as the stats row content
+ */
 function setStats(html)    { document.getElementById('stats-row').innerHTML=html; }
+
+/**
+ * injects HTML into the formula box element
+ * @param {string} html - HTML string to set as the formula box content
+ */
 function setFormulas(html) { document.getElementById('formula-box').innerHTML=html; }
 
 // ── INCLINED PLANE ────────────────────────────────────────────────────────────
 let incAnim = null, incPos = 0.55; // 0=top, 1=bottom of ramp
 
+/**
+ * reads inclined-plane input values and computes all derived forces and motion quantities:
+ * @returns {{theta: number, m: number, us: number, uk: number, W_: number, N: number,
+ *   fs_max: number, fk: number, Wpar: number, sliding: boolean, fric: number,
+ *   Fnet: number, a: number}} Object containing all incline physics values
+ */
 function getIncline() {
     const theta = parseFloat(document.getElementById('inc-angle').value) * Math.PI/180;
     const m     = parseFloat(document.getElementById('inc-mass').value);
@@ -62,6 +100,10 @@ function getIncline() {
     return {theta,m,us,uk,W_,N,fs_max,fk,Wpar,sliding,fric,Fnet,a};
 }
 
+/**
+ * draws the inclined-plane scene with the penguin at the given ramp position
+ * @param {number} pos - Normalised position along the ramp (0 = top, 1 = bottom)
+ */
 function drawInclineAt(pos) {
     const p = getIncline();
     const cy = H()*0.82;
@@ -131,8 +173,14 @@ function drawInclineAt(pos) {
     );
 }
 
+/**
+ * draws the inclined-plane scene at the current animation position
+ */
 function drawIncline() { drawInclineAt(incPos); }
 
+/**
+ * cancels any running inclined-plane animation frame
+ */
 function stopInclineAnim() {
     if (incAnim) { cancelAnimationFrame(incAnim); incAnim = null; }
 }
@@ -140,6 +188,11 @@ function stopInclineAnim() {
 // ── CONNECTED OBJECTS ─────────────────────────────────────────────────────────
 let conAnim = null, conOffset = 0, conRunning = false;
 
+/**
+ * reads connected-objects input values and computes acceleration and tension forces.
+ * @returns {{mA: number, mB: number, uk: number, F: number, fric: number,
+ *   Fnet: number, a: number, T1: number, T2: number}} Object containing all connected-objects physics values.
+ */
 function getConnected() {
     const mA=parseFloat(document.getElementById('con-ma').value);
     const mB=parseFloat(document.getElementById('con-mb').value);
@@ -153,6 +206,10 @@ function getConnected() {
     return {mA,mB,uk,F,fric,Fnet,a,T1,T2};
 }
 
+/**
+ * draws the connected-objects scene with both penguins at the given horizontal offset
+ * @param {number} offset - Horizontal pixel offset applied to both objects
+ */
 function drawConnectedAt(offset) {
     const p = getConnected();
     const ps=72, groundY=H()*0.75;
@@ -207,8 +264,14 @@ function drawConnectedAt(offset) {
     );
 }
 
+/**
+ * draws the connected-objects scene at the current animation offset
+ */
 function drawConnected() { drawConnectedAt(conOffset); }
 
+/**
+ * cancels any running connected-objects animation and resets the running flag
+ */
 function stopConAnim() {
     if (conAnim) { cancelAnimationFrame(conAnim); conAnim = null; }
     conRunning = false;
@@ -217,6 +280,10 @@ function stopConAnim() {
 // ── SPRING ────────────────────────────────────────────────────────────────────
 let sprAnim=null, sprX=0, sprV=0, sprRunning=false;
 
+/**
+ * reads spring input values from the DOM
+ * @returns {{k: number, m: number, x0: number}} Spring constant, mass, and initial displacement
+ */
 function getSpringParams() {
     return {
         k: parseFloat(document.getElementById('spr-k').value),
@@ -225,6 +292,10 @@ function getSpringParams() {
     };
 }
 
+/**
+ * draws the spring scene with the penguin displaced by x metres from equilibrium
+ * @param {number} x - Current displacement from the natural length in metres
+ */
 function drawSpringAt(x) {
     const {k,m} = getSpringParams();
     const F=-k*x, W_=m*G;
@@ -293,12 +364,18 @@ function drawSpringAt(x) {
     );
 }
 
+/**
+ * draws the spring scene at the current displacement, resetting velocity if not running
+ */
 function drawSpring() {
     const {x0}=getSpringParams();
     if (!sprRunning) { sprX=x0; sprV=0; }
     drawSpringAt(sprX);
 }
 
+/**
+ * starts the spring oscillation animation from the current initial displacement
+ */
 function releaseSpr() {
     const {k,m,x0}=getSpringParams();
     sprX=x0; sprV=0; sprRunning=true;
@@ -314,11 +391,17 @@ function releaseSpr() {
     sprAnim=requestAnimationFrame(tick);
 }
 
+/**
+ * cancels the spring animation and clears the running flag
+ */
 function stopSpr() {
     if (sprAnim) { cancelAnimationFrame(sprAnim); sprAnim=null; }
     sprRunning=false;
 }
 
+/**
+ * stops the spring animation and redraws the spring at zero displacement
+ */
 function resetSpr() { stopSpr(); sprX=0; sprV=0; drawSpringAt(0); }
 
 // ── CIRCULAR MOTION ───────────────────────────────────────────────────────────
@@ -331,6 +414,16 @@ function getCircular() {
     return {m,r,v,ac:v*v/r,T:m*v*v/r};
 }
 
+/**
+ * draws a single circular-motion animation frame with the penguin at the given position:
+ * @param {number} cx - Canvas x coordinate of the circle centre in pixels
+ * @param {number} cy - Canvas y coordinate of the circle centre in pixels
+ * @param {number} rPx - Radius of the circular path in pixels
+ * @param {number} ox - Current x position of the penguin in pixels
+ * @param {number} oy - Current y position of the penguin in pixels
+ * @param {{m: number, r: number, v: number, ac: number, T: number}} p - Circular motion physics values
+ * @param {boolean} cut - Whether the string has been cut (free-flight mode)
+ */
 function drawCircularFrame(cx,cy,rPx,ox,oy,p,cut) {
     ctx.clearRect(0,0,W(),H());
     ctx.fillStyle='#f5f0e8'; ctx.fillRect(0,0,W(),H());
@@ -374,6 +467,9 @@ function drawCircularFrame(cx,cy,rPx,ox,oy,p,cut) {
     );
 }
 
+/**
+ * starts the circular-motion animation loop if it is not already running
+ */
 function startCircAnim() {
     if (circAnim) return;
     circCut=false;
@@ -389,6 +485,9 @@ function startCircAnim() {
     circAnim=requestAnimationFrame(tick);
 }
 
+/**
+ * cuts the circular-motion string and launches the penguin on a tangential free-flight path
+ */
 function cutString() {
     if (!circAnim && !circCut) return;
     cancelAnimationFrame(circAnim); circAnim=null;
@@ -411,17 +510,25 @@ function cutString() {
     circAnim=requestAnimationFrame(fly);
 }
 
+/**
+ * resets the circular-motion scene to angle zero and restarts the animation
+ */
 function resetCirc() {
     if (circAnim) { cancelAnimationFrame(circAnim); circAnim=null; }
     circCut=false; circAngle=0;
     startCircAnim();
 }
 
+/**
+ * cancels the circular-motion animation frame if one is active
+ */
 function stopCircAnim() {
     if (circAnim) { cancelAnimationFrame(circAnim); circAnim=null; }
 }
 
-// ── DRAW DISPATCHER ───────────────────────────────────────────────────────────
+/**
+ * dispatches a redraw to the currently active simulation mode
+ */
 function draw() {
     if (mode==='incline')        drawIncline();
     else if (mode==='connected') drawConnected();
@@ -448,6 +555,13 @@ document.querySelectorAll('.mode-tab').forEach(btn => {
 });
 
 // ── SLIDER LISTENERS ─────────────────────────────────────────────────────────
+/**
+ * binds a range slider to a display element, updating the label and redrawing on input:
+ * @param {string} id - The DOM id of the range input
+ * @param {string} displayId - The DOM id of the element that shows the current value
+ * @param {string} suffix - Unit suffix appended to the displayed value
+ * @param {number} [decimals=0] - Number of decimal places for the displayed value
+ */
 function bindSlider(id,displayId,suffix,decimals=0) {
     const el=document.getElementById(id);
     if (!el) return;
