@@ -1,10 +1,16 @@
+/** @type {HTMLCanvasElement} */
 const canvas = document.getElementById('canvas');
+/** @type {CanvasRenderingContext2D} */
 const ctx    = canvas.getContext('2d');
+/** @type {HTMLElement} */
 const wrap   = document.getElementById('canvas-wrap');
 
+/** @type {number} */
 const G = 9.8;
+/** @type {'incline'|'connected'|'spring'|'circular'} */
 let mode = 'incline';
 
+/** @type {HTMLImageElement} */
 const penguinImg = new Image();
 penguinImg.src = './assets/penguin.png';
 penguinImg.onload = () => draw();
@@ -19,7 +25,9 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', () => { resizeCanvas(); draw(); });
 
+/** @returns {number} */
 const W = () => canvas.width;
+/** @returns {number} */
 const H = () => canvas.height;
 
 /**
@@ -79,7 +87,10 @@ function setStats(html)    { document.getElementById('stats-row').innerHTML=html
 function setFormulas(html) { document.getElementById('formula-box').innerHTML=html; }
 
 // ── INCLINED PLANE ────────────────────────────────────────────────────────────
-let incAnim = null, incPos = 0.55; // 0=top, 1=bottom of ramp
+/** @type {number|null} */
+let incAnim = null;
+/** @type {number} */
+let incPos = 0.55; // 0=top, 1=bottom of ramp
 
 /**
  * reads inclined-plane input values and computes all derived forces and motion quantities:
@@ -186,7 +197,12 @@ function stopInclineAnim() {
 }
 
 // ── CONNECTED OBJECTS ─────────────────────────────────────────────────────────
-let conAnim = null, conOffset = 0, conRunning = false;
+/** @type {number|null} */
+let conAnim = null;
+/** @type {number} */
+let conOffset = 0;
+/** @type {boolean} */
+let conRunning = false;
 
 /**
  * reads connected-objects input values and computes acceleration and tension forces.
@@ -278,7 +294,14 @@ function stopConAnim() {
 }
 
 // ── SPRING ────────────────────────────────────────────────────────────────────
-let sprAnim=null, sprX=0, sprV=0, sprRunning=false;
+/** @type {number|null} */
+let sprAnim=null;
+/** @type {number} */
+let sprX=0;
+/** @type {number} */
+let sprV=0;
+/** @type {boolean} */
+let sprRunning=false;
 
 /**
  * reads spring input values from the DOM
@@ -380,7 +403,10 @@ function releaseSpr() {
     const {k,m,x0}=getSpringParams();
     sprX=x0; sprV=0; sprRunning=true;
     if (sprAnim) cancelAnimationFrame(sprAnim);
-    const dt=0.016, damping=0.015;
+    /** @type {number} */
+    const dt=0.016;
+    /** @type {number} */
+    const damping=0.015;
     function tick() {
         const F=-k*sprX - damping*sprV*Math.sqrt(k*m);
         sprV += F/m*dt;
@@ -405,8 +431,25 @@ function stopSpr() {
 function resetSpr() { stopSpr(); sprX=0; sprV=0; drawSpringAt(0); }
 
 // ── CIRCULAR MOTION ───────────────────────────────────────────────────────────
-let circAngle=0, circAnim=null, circCut=false, circVx=0, circVy=0, circPx=0, circPy=0;
+/** @type {number} */
+let circAngle=0;
+/** @type {number|null} */
+let circAnim=null;
+/** @type {boolean} */
+let circCut=false;
+/** @type {number} */
+let circVx=0;
+/** @type {number} */
+let circVy=0;
+/** @type {number} */
+let circPx=0;
+/** @type {number} */
+let circPy=0;
 
+/**
+ * reads circular motion input values from the DOM
+ * @returns {{m: number, r: number, v: number, ac: number, T: number}} Circular motion physics values
+ */
 function getCircular() {
     const m=parseFloat(document.getElementById('cir-m').value);
     const r=parseFloat(document.getElementById('cir-r').value);

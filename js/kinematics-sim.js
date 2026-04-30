@@ -1,7 +1,11 @@
+/** @type {HTMLCanvasElement} */
 const canvas = document.getElementById('canvas');
+/** @type {CanvasRenderingContext2D} */
 const ctx    = canvas.getContext('2d');
+/** @type {HTMLElement} */
 const wrap   = document.getElementById('canvas-wrap');
 
+/** @type {string[]} */
 const COLORS = [
     'rgba(186,186,191,0.9)',
     'rgba(200,140,80,0.9)',
@@ -10,15 +14,55 @@ const COLORS = [
     'rgba(180,80,180,0.9)',
 ];
 
-let animId = null, running = false, paused = false, t = 0;
-let v0, angleRad, g, h0, vx, vy0, scale, originX, originY, maxRange, maxHeight;
+/** @type {number|null} */
+let animId = null;
+/** @type {boolean} */
+let running = false;
+/** @type {boolean} */
+let paused = false;
+/** @type {number} */
+let t = 0;
+/** @type {number} */
+let v0;
+/** @type {number} */
+let angleRad;
+/** @type {number} */
+let g;
+/** @type {number} */
+let h0;
+/** @type {number} */
+let vx;
+/** @type {number} */
+let vy0;
+/** @type {number} */
+let scale;
+/** @type {number} */
+let originX;
+/** @type {number} */
+let originY;
+/** @type {number} */
+let maxRange;
+/** @type {number} */
+let maxHeight;
+/** @type {Array<[number, number, number]>} */
 let trail = [];
+/** @type {Array<{trail: Array<[number, number, number]>, color: string, label: string}>} */
 let savedTrails = [];
+/** @type {number} */
 let colorIdx = 0;
-let useDrag = false, showComps = true, compareMode = true, simSpeed = 1.0;
+/** @type {boolean} */
+let useDrag = false;
+/** @type {boolean} */
+let showComps = true;
+/** @type {boolean} */
+let compareMode = true;
+/** @type {number} */
+let simSpeed = 1.0;
+/** @type {number} */
 const DRAG_K = 0.05;
 
 // preload penguin image
+/** @type {HTMLImageElement} */
 const penguinImg = new Image();
 penguinImg.src = './assets/penguin.png';
 penguinImg.onload = () => { if (!running) drawStatic(); };
@@ -58,7 +102,7 @@ function setupScale() {
  * Converts physics coordinates (metres) to canvas pixel coordinates.
  * @param {number} x - Horizontal position in metres.
  * @param {number} y - Vertical position in metres.
- * @returns {number[]} Two-element array [screenX, screenY] in pixels.
+ * @returns {[number, number]} Two-element array [screenX, screenY] in pixels.
  */
 function toScreen(x, y) {
     return [originX + x * scale, originY - y * scale];
@@ -68,6 +112,7 @@ function toScreen(x, y) {
 function updateDYK() {
     const deg = Math.round(parseFloat(document.getElementById('angle').value));
     const dyk = document.getElementById('dyk');
+    /** @type {string} */
     let msg = ''; // eslint-disable-line no-useless-assignment
     if (deg === 45)      msg = 'At <span>45°</span> the range is maximised on flat ground.';
     else if (deg < 20)   msg = 'Very shallow angles give a low, fast trajectory — great for skipping stones!';
@@ -139,7 +184,16 @@ function drawGhostTrajectory() {
     ctx.strokeStyle = 'rgba(0,0,0,0.12)';
     ctx.lineWidth = 1.5; ctx.setLineDash([4, 6]);
     if (useDrag) {
-        let px = 0, py = h0, pvx = vx, pvy = vy0, dt = 0.02;
+        /** @type {number} */
+        let px = 0;
+        /** @type {number} */
+        let py = h0;
+        /** @type {number} */
+        let pvx = vx;
+        /** @type {number} */
+        let pvy = vy0;
+        /** @type {number} */
+        const dt = 0.02;
         ctx.moveTo(...toScreen(px, py));
         for (let i = 0; i < 2000; i++) {
             pvx += -DRAG_K * pvx * dt;
@@ -292,6 +346,7 @@ function drawFrame(px, py, curVx, curVy) {
     document.getElementById('s-speed').innerHTML = speed.toFixed(1) + '<span class="stat-unit">m/s</span>';
 }
 
+/** @type {{px: number, py: number, pvx: number, pvy: number}} */
 let state = { px: 0, py: 0, pvx: 0, pvy: 0 };
 
 /**
@@ -313,6 +368,7 @@ function physicsStep(dt) {
     }
 }
 
+/** @type {number} */
 const BASE_DT = 0.025;
 
 /** Main animation loop — advances physics, records the trail, and stops on landing. */
@@ -416,8 +472,8 @@ document.getElementById('simspeed').addEventListener('input', e => {
 /**
  * Wires a toggle button to a getter/setter pair and redraws when toggled.
  * @param {string} id - DOM id of the toggle button.
- * @param {Function} getter - Returns the current boolean state.
- * @param {Function} setter - Accepts the new boolean state.
+ * @param {function(): boolean} getter - Returns the current boolean state.
+ * @param {function(boolean): void} setter - Accepts the new boolean state.
  */
 function bindToggle(id, getter, setter) {
     const btn = document.getElementById(id);
@@ -467,6 +523,7 @@ function applyAngle(deg) {
     getParams(); setupScale(); drawStatic(); updateDYK();
 }
 
+/** @type {boolean} */
 let isDraggingAngle = false;
 
 canvas.addEventListener('mousedown', e => {
