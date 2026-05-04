@@ -60,4 +60,4 @@ still adding topics as i go through my courses. if something's wrong or missing 
 
 ## license
 
-[MIT](LICENSE)
+MIT © Maria Cabrera
